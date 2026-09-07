@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio | Muhammad Yusuf Arifin</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome untuk Ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cyber: {
+                            dark: '#0a0f16',
+                            card: '#111827',
+                            neon: '#00f0ff',
+                            blue: '#0070f3',
+                            gray: '#8b949e'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    boxShadow: {
+                        neon: '0 0 10px rgba(0, 240, 255, 0.5), 0 0 20px rgba(0, 240, 255, 0.3)',
+                        'neon-hover': '0 0 15px rgba(0, 240, 255, 0.8), 0 0 30px rgba(0, 240, 255, 0.5)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #050a11;
+            color: #e5e7eb;
+            background-image: 
+                linear-gradient(rgba(0, 240, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 240, 255, 0.05) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+
+        .cyber-border-top { border-top: 2px solid #00f0ff; }
+        .cyber-border-left { border-left: 2px solid #00f0ff; }
+
+        /* Glowing card effect on hover */
+        .tech-card {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0, 240, 255, 0.2);
+        }
+        
+        .tech-card:hover {
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+            border-color: rgba(0, 240, 255, 0.8);
+            transform: translateY(-5px);
+        }
+
+        .tech-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00f0ff);
+            transition: all 0.5s ease;
+        }
+        .tech-card:hover::before { left: 100%; }
+
+        /* Image styling */
+        img { background-color: #1f2937; position: relative; }
+        
+        /* Carousel Styling */
+        .carousel-container { position: relative; }
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .carousel-slide {
+            min-width: 100%;
+            cursor: zoom-in;
+        }
+
+        /* Tag styling */
+        .tech-tag {
+            background: rgba(0, 240, 255, 0.05);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            color: #00f0ff;
+            transition: all 0.3s;
+        }
+        .tech-tag:hover {
+            background: rgba(0, 240, 255, 0.2);
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+        }
+
+        /* Typewriter Animation */
+        .typewriter h1 {
+            overflow: hidden;
+            border-right: .15em solid #00f0ff;
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: .15em;
+            animation: typing 3s steps(40, end), blink-caret .75s step-end infinite;
+        }
+        @keyframes typing { from { width: 0 } to { width: 100% } }
+        @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: #00f0ff; } }
+
+        .glitch-text:hover { animation: glitch 0.2s linear infinite; }
+        @keyframes glitch {
+            0% { transform: translate(0) }
+            20% { transform: translate(-2px, 2px) }
+            40% { transform: translate(-2px, -2px) }
+            60% { transform: translate(2px, 2px) }
+            80% { transform: translate(2px, -2px) }
+            100% { transform: translate(0) }
+        }
+
+        /* Scrollbar kustom */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0a0f16; }
+        ::-webkit-scrollbar-thumb { background: #00f0ff; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #00c3d9; }
+
+        /* Lightbox Kustom */
+        #lightbox { backdrop-filter: blur(8px); }
+        .lightbox-trigger { cursor: zoom-in; transition: transform 0.3s; }
+        .lightbox-trigger:hover { filter: brightness(1.2); }
+    </style>
+</head>
+<body class="font-sans antialiased text-gray-300">
+
+    <nav class="fixed w-full z-50 bg-cyber-dark/90 backdrop-blur-md border-b border-cyber-neon/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0">
+                    <span class="font-mono text-xl font-bold text-cyber-neon glitch-text cursor-pointer">&lt;M_Yusuf_A /&gt;</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-6">
+                        <a href="#about" class="hover:text-cyber-neon transition-colors font-mono text-sm px-3 py-2">01. Tentang</a>
+                        <a href="#skills" class="hover:text-cyber-neon transition-colors font-mono text-sm px-3 py-2">02. Keahlian</a>
+                        <a href="#experience" class="hover:text-cyber-neon transition-colors font-mono text-sm px-3 py-2">03. Pengalaman</a>
+                        <a href="#projects" class="hover:text-cyber-neon transition-colors font-mono text-sm px-3 py-2">04. Proyek</a>
+                        <a href="#certificates" class="hover:text-cyber-neon transition-colors font-mono text-sm px-3 py-2">05. Sertifikasi</a>
+                        <a href="#contact" class="hover:text-cyber-neon border border-transparent hover:border-cyber-neon px-4 py-1 rounded transition-all font-mono text-sm">Hubungi Saya</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main id="about" class="pt-24 pb-12 lg:pt-32 lg:pb-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col-reverse lg:flex-row items-center justify-between gap-12">
+                
+                <div class="lg:w-2/3 flex flex-col space-y-6">
+                    <div class="font-mono text-cyber-neon text-lg flex items-center gap-2">
+                        <i class="fas fa-terminal"></i> system.out.println("Halo, nama saya");
+                    </div>
+                    <div class="typewriter w-fit">
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-white tracking-tight">M YUSUF ARIFIN</h1>
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-semibold text-gray-400">IT Support Specialist & Web Developer</h2>
+                    
+                    <div class="cyber-border-left pl-6 py-2 mt-4 space-y-4 text-gray-400 leading-relaxed max-w-3xl">
+                        <p>
+                            Saya adalah lulusan S1 Informatika Universitas Sahid Surakarta berpredikat <strong>Cumlaude (IPK 3,90)</strong>, 
+                            memiliki ketertarikan mendalam di bidang <strong>IT Support</strong>. 
+                        </p>
+                        <p>
+                            Bagi saya, dunia IT bukan sekadar menangani sistem dan perangkat, tetapi tentang membantu orang lain bekerja dengan nyaman tanpa terhambat masalah teknis. Berpengalaman dalam web development, menangani kendala hardware maupun software, hingga pemeliharaan operasional harian, saya selalu menikmati proses mendiagnosis masalah dan menghadirkan solusi teknis yang cepat, tepat, serta ramah bagi pengguna.
+                        </p>
+                    </div>
+
+                    <div class="flex gap-4 pt-4">
+                        <a href="#contact" class="bg-transparent border-2 border-cyber-neon text-cyber-neon hover:bg-cyber-neon hover:text-cyber-dark font-mono font-bold py-3 px-6 rounded transition-all duration-300 shadow-[0_0_15px_rgba(0,240,255,0.2)] hover:shadow-neon-hover">
+                            Initialize_Contact()
+                        </a>
+                        <a href="#experience" class="bg-gray-800 hover:bg-gray-700 border border-gray-600 text-white font-mono font-bold py-3 px-6 rounded transition-all duration-300">
+                            View_Logs()
+                        </a>
+                    </div>
+                </div>
+
+                <div class="lg:w-1/3 flex justify-center">
+                    <div class="relative w-64 h-64 sm:w-80 sm:h-80 rounded-full p-2 border border-cyber-neon/50 shadow-neon group">
+                        <div class="absolute inset-0 rounded-full border-t-2 border-r-2 border-cyber-neon animate-spin" style="animation-duration: 3s;"></div>
+                        <div class="w-full h-full rounded-full overflow-hidden border-4 border-cyber-dark bg-gray-800 flex items-center justify-center">
+                            <img src="images/profile.jpg" data-gallery="profile" alt="Profil Yusuf" class="lightbox-trigger object-cover w-full h-full group-hover:scale-110 transition-transform duration-500" onerror="this.src='https://placehold.co/400x400/111827/00f0ff?text=IMG:+\\nprofile.jpg'">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <section id="skills" class="py-16 bg-cyber-dark/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center gap-4 mb-10">
+                <span class="font-mono text-cyber-neon text-xl">02.</span>
+                <h2 class="text-3xl font-bold text-white flex-1 cyber-border-top pt-2">System_Capabilities</h2>
+            </div>
+            
+            <div class="flex flex-wrap gap-3 lg:gap-4">
+                <span class="tech-tag font-mono text-sm py-2 px-4 rounded-full cursor-default"><i class="fas fa-microchip mr-2"></i>Computer Maintenance</span>
+                <span class="tech-tag font-mono text-sm py-2 px-4 rounded-full cursor-default"><i class="fas fa-wrench mr-2"></i>Problem Solving</span>
+                <span class="tech-tag font-mono text-sm py-2 px-4 rounded-full cursor-default"><i class="fas fa-comments mr-2"></i>Communication</span>
+                <span class="tech-tag font-mono text-sm py-2 px-4 rounded-full cursor-default"><i class="fas fa-brain mr-2"></i>Critical Thinking</span>
+                <span class="tech-tag font-mono text-sm py-2 px-4 rounded-full cursor-default"><i class="fas fa-robot mr-2"></i>Robotics</span>
+                <span class="tech-tag font-mono text-sm py-2 px-4 rounded-full cursor-default"><i class="fas fa-server mr-2"></i>IT Hardware Support</span>
+                <span class="tech-tag font-mono text-sm py-2 px-4 rounded-full cursor-default"><i class="fas fa-users mr-2"></i>Teamwork</span>
+                <span class="tech-tag font-mono text-sm py-2 px-4 rounded-full cursor-default"><i class="fas fa-clock mr-2"></i>Time Management</span>
+                <span class="tech-tag font-mono text-sm py-2 px-4 rounded-full cursor-default"><i class="fas fa-sync-alt mr-2"></i>Adaptability</span>
+                <span class="tech-tag font-mono text-sm py-2 px-4 rounded-full cursor-default"><i class="fas fa-cogs mr-2"></i>Robotic Process Automation (RPA)</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center gap-4 mb-12">
+                <span class="font-mono text-cyber-neon text-xl">03.</span>
+                <h2 class="text-3xl font-bold text-white flex-1 cyber-border-top pt-2">Execution_Logs (Pengalaman Kerja)</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Pengalaman 1 (Carousel) -->
+                <div class="tech-card bg-cyber-card rounded-lg flex flex-col h-full">
+                    <div class="h-48 w-full overflow-hidden bg-gray-800 relative carousel-container">
+                        <div class="absolute top-2 right-2 bg-cyber-dark/80 text-cyber-neon font-mono text-xs px-2 py-1 border border-cyber-neon/50 rounded z-10">Aktif</div>
+                        <div class="carousel-track h-full w-full">
+                            <img src="images/kerja1_1.jpg" data-gallery="andalan" class="carousel-slide lightbox-trigger object-cover h-full" onerror="this.src='https://placehold.co/600x400/1f2937/00f0ff?text=IMG:+\\nkerja1_1.jpg'">
+                            <img src="images/kerja1_2.jpg" data-gallery="andalan" class="carousel-slide lightbox-trigger object-cover h-full" onerror="this.src='https://placehold.co/600x400/1f2937/00f0ff?text=IMG:+\\nkerja1_2.jpg'">
+                            <img src="images/kerja1_3.jpg" data-gallery="andalan" class="carousel-slide lightbox-trigger object-cover h-full" onerror="this.src='https://placehold.co/600x400/1f2937/00f0ff?text=IMG:+\\nkerja1_3.jpg'">
+                        </div>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <div class="font-mono text-cyber-neon text-sm mb-2">Mei 2025 - Sekarang</div>
+                        <h3 class="text-xl font-bold text-white mb-1">Teknisi Komputer</h3>
+                        <h4 class="text-gray-400 text-sm mb-4"><i class="fas fa-building mr-2"></i>Andalan Tech</h4>
+                        <p class="text-gray-400 text-sm flex-1">
+                            Bertanggung jawab instalasi, perawatan, dan perbaikan perangkat komputer serta jaringan. Mendeskripsikan dan menyelesaikan berbagai permasalahan hardware maupun software secara efisien.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Pengalaman 2 (Carousel) -->
+                <div class="tech-card bg-cyber-card rounded-lg flex flex-col h-full">
+                    <div class="h-48 w-full overflow-hidden bg-gray-800 relative carousel-container">
+                        <div class="carousel-track h-full w-full">
+                            <img src="images/kerja2_1.jpg" data-gallery="robotika" class="carousel-slide lightbox-trigger object-cover h-full" onerror="this.src='https://placehold.co/600x400/1f2937/00f0ff?text=IMG:+\\nkerja2_1.jpg'">
+                            <img src="images/kerja2_2.jpg" data-gallery="robotika" class="carousel-slide lightbox-trigger object-cover h-full" onerror="this.src='https://placehold.co/600x400/1f2937/00f0ff?text=IMG:+\\nkerja2_2.jpg'">
+                            <img src="images/kerja2_3.jpg" data-gallery="robotika" class="carousel-slide lightbox-trigger object-cover h-full" onerror="this.src='https://placehold.co/600x400/1f2937/00f0ff?text=IMG:+\\nkerja2_3.jpg'">
+                        </div>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <div class="font-mono text-cyber-neon text-sm mb-2">Sept 2024 - April 2026</div>
+                        <h3 class="text-xl font-bold text-white mb-1">Pembina Robotika</h3>
+                        <h4 class="text-gray-400 text-sm mb-4"><i class="fas fa-school mr-2"></i>MA Negeri 2 Surakarta</h4>
+                        <p class="text-gray-400 text-sm flex-1">
+                            Membimbing dan melatih siswa dalam ekstrakurikuler robotika, meningkatkan pemahaman teknologi hardware dan pemrograman dasar.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Pengalaman 3 (Carousel) -->
+                <div class="tech-card bg-cyber-card rounded-lg flex flex-col h-full">
+                    <div class="h-48 w-full overflow-hidden bg-gray-800 relative carousel-container">
+                        <div class="carousel-track h-full w-full">
+                            <img src="images/kerja3_1.jpg" data-gallery="itsupport" class="carousel-slide lightbox-trigger object-cover h-full" onerror="this.src='https://placehold.co/600x400/1f2937/00f0ff?text=IMG:+\\nkerja3_1.jpg'">
+                            <img src="images/kerja3_2.jpg" data-gallery="itsupport" class="carousel-slide lightbox-trigger object-cover h-full" onerror="this.src='https://placehold.co/600x400/1f2937/00f0ff?text=IMG:+\\nkerja3_2.jpg'">
+                            <img src="images/kerja3_3.jpg" data-gallery="itsupport" class="carousel-slide lightbox-trigger object-cover h-full" onerror="this.src='https://placehold.co/600x400/1f2937/00f0ff?text=IMG:+\\nkerja3_3.jpg'">
+                        </div>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <div class="font-mono text-cyber-neon text-sm mb-2">Juli 2020 - Juni 2026</div>
+                        <h3 class="text-xl font-bold text-white mb-1">IT Support</h3>
+                        <h4 class="text-gray-400 text-sm mb-4"><i class="fas fa-school mr-2"></i>MA Negeri 2 Surakarta</h4>
+                        <p class="text-gray-400 text-sm flex-1">
+                            Mengelola Lab TIK. Memberikan bantuan teknis instalasi, perawatan, troubleshooting pada komputer dan pendataan inventaris.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="py-16 bg-cyber-dark/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center gap-4 mb-12">
+                <span class="font-mono text-cyber-neon text-xl">04.</span>
+                <h2 class="text-3xl font-bold text-white flex-1 cyber-border-top pt-2">Project_Modules (Proyek)</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <!-- Project 1 -->
+                <div class="tech-card bg-cyber-card rounded-lg flex flex-col h-full group">
+                    <div class="h-48 w-full overflow-hidden bg-gray-800">
+                        <img src="images/project1.jpg" data-gallery="projects" class="lightbox-trigger object-cover w-full h-full group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/600x400/1f2937/00f0ff?text=IMG:+\\nproject1.jpg'">
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <div class="font-mono text-cyber-neon text-xs mb-2">Mei 2025 - Jun 2025</div>
+                        <h3 class="text-xl font-bold text-white mb-3">Agri Detect</h3>
+                        <p class="text-gray-400 text-sm flex-1 mb-4">
+                            Aplikasi berbasis web menggunakan AI untuk mendeteksi penyakit tanaman melalui analisis citra daun. Dibangun menggunakan model Deep Learning (TensorFlow.js), React.js, Vite, Node.js, dan MongoDB.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mt-auto">
+                            <span class="text-xs bg-cyber-neon/10 text-cyber-neon border border-cyber-neon/30 px-2 py-1 rounded">React.js</span>
+                            <span class="text-xs bg-cyber-neon/10 text-cyber-neon border border-cyber-neon/30 px-2 py-1 rounded">TensorFlow.js</span>
+                            <span class="text-xs bg-cyber-neon/10 text-cyber-neon border border-cyber-neon/30 px-2 py-1 rounded">MongoDB</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="tech-card bg-cyber-card rounded-lg flex flex-col h-full group">
+                    <div class="h-48 w-full overflow-hidden bg-gray-800">
+                        <img src="images/project2.jpg" data-gallery="projects" class="lightbox-trigger object-cover w-full h-full group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/600x400/1f2937/00f0ff?text=IMG:+\\nproject2.jpg'">
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <div class="font-mono text-cyber-neon text-xs mb-2">Okt 2024 - Des 2024</div>
+                        <h3 class="text-xl font-bold text-white mb-3">Sistem Penyiram Otomatis</h3>
+                        <p class="text-gray-400 text-sm flex-1 mb-4">
+                            Prototipe IoT menggunakan mikrokontroler ESP32 terintegrasi dengan aplikasi Blynk. Mengandalkan sensor kelembapan tanah untuk otomatisasi penyiraman dan pemantauan secara real-time via smartphone.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mt-auto">
+                            <span class="text-xs bg-cyber-neon/10 text-cyber-neon border border-cyber-neon/30 px-2 py-1 rounded">IoT</span>
+                            <span class="text-xs bg-cyber-neon/10 text-cyber-neon border border-cyber-neon/30 px-2 py-1 rounded">ESP32</span>
+                            <span class="text-xs bg-cyber-neon/10 text-cyber-neon border border-cyber-neon/30 px-2 py-1 rounded">Blynk</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="tech-card bg-cyber-card rounded-lg flex flex-col h-full group">
+                    <div class="h-48 w-full overflow-hidden bg-gray-800">
+                        <img src="images/project3.jpg" data-gallery="projects" class="lightbox-trigger object-cover w-full h-full group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/600x400/1f2937/00f0ff?text=IMG:+\\nproject3.jpg'">
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <div class="font-mono text-cyber-neon text-xs mb-2">Proyek Terapan</div>
+                        <h3 class="text-xl font-bold text-white mb-3">Presensi Online MAN 2 SKA</h3>
+                        <p class="text-gray-400 text-sm flex-1 mb-4">
+                            Sistem presensi siswa berbasis web yang mengutilisasi pemindaian QR Code dilengkapi dengan pelaporan real-time menggunakan notifikasi WhatsApp.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mt-auto">
+                            <span class="text-xs bg-cyber-neon/10 text-cyber-neon border border-cyber-neon/30 px-2 py-1 rounded">QR Code</span>
+                            <span class="text-xs bg-cyber-neon/10 text-cyber-neon border border-cyber-neon/30 px-2 py-1 rounded">DeepFace</span>
+                            <span class="text-xs bg-cyber-neon/10 text-cyber-neon border border-cyber-neon/30 px-2 py-1 rounded">WA API</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 bg-cyber-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div>
+                    <div class="flex items-center gap-4 mb-8">
+                        <i class="fas fa-graduation-cap text-cyber-neon text-2xl"></i>
+                        <h2 class="text-2xl font-bold text-white">Database_Akademik</h2>
+                    </div>
+                    <div class="cyber-border-left pl-6 relative">
+                        <div class="absolute w-3 h-3 bg-cyber-neon rounded-full -left-[7px] top-1 shadow-neon"></div>
+                        <div class="font-mono text-cyber-neon mb-1">2022 - 2026</div>
+                        <h3 class="text-xl font-bold text-white">S1 Informatika</h3>
+                        <h4 class="text-gray-300 mb-2">Universitas Sahid Surakarta</h4>
+                        <p class="text-gray-400 text-sm"><span class="bg-cyber-neon/20 text-cyber-neon px-2 py-0.5 rounded text-xs border border-cyber-neon/50">Cumlaude (IPK 3.90)</span></p>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex items-center gap-4 mb-8">
+                        <i class="fas fa-trophy text-cyber-neon text-2xl"></i>
+                        <h2 class="text-2xl font-bold text-white">Achievements_Array</h2>
+                    </div>
+                    <div class="cyber-border-left pl-6 relative">
+                        <div class="absolute w-3 h-3 bg-cyber-neon rounded-full -left-[7px] top-1 shadow-neon"></div>
+                        <div class="font-mono text-cyber-neon mb-1">2024</div>
+                        <h3 class="text-xl font-bold text-white">Author</h3>
+                        <h4 class="text-gray-300">The 6th International Conference on Cybernetics and Intelligent Systems (ICORIS)</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="certificates" class="py-20 bg-cyber-dark/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center gap-4 mb-12">
+                <span class="font-mono text-cyber-neon text-xl">05.</span>
+                <h2 class="text-3xl font-bold text-white flex-1 cyber-border-top pt-2">Security_Clearances (Sertifikasi)</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <div class="tech-card bg-cyber-card flex flex-col sm:flex-row rounded-lg overflow-hidden h-full">
+                    <div class="w-full sm:w-2/5 h-48 sm:h-auto bg-gray-800 border-r border-cyber-neon/20">
+                        <img src="images/sertif1.jpg" data-gallery="certs" class="lightbox-trigger w-full h-full object-cover" onerror="this.src='https://placehold.co/400x400/1f2937/00f0ff?text=IMG:+\\nsertif1.jpg'">
+                    </div>
+                    <div class="w-full sm:w-3/5 p-6 flex flex-col justify-center">
+                        <div class="font-mono text-cyber-neon text-xs mb-2"><i class="fas fa-certificate mr-1"></i>Feb 2025 - Juli 2025</div>
+                        <h3 class="text-lg font-bold text-white mb-2 leading-tight">Coding Camp powered by DBS Foundation</h3>
+                        <p class="text-gray-400 text-xs">Pelatihan intensif bidang Web Development (Front-End & Back-End) mencakup HTML, CSS, JavaScript, Node.js, dan RESTful API.</p>
+                    </div>
+                </div>
+
+                <div class="tech-card bg-cyber-card flex flex-col sm:flex-row rounded-lg overflow-hidden h-full">
+                    <div class="w-full sm:w-2/5 h-48 sm:h-auto bg-gray-800 border-r border-cyber-neon/20">
+                        <img src="images/sertif2.jpg" data-gallery="certs" class="lightbox-trigger w-full h-full object-cover" onerror="this.src='https://placehold.co/400x400/1f2937/00f0ff?text=IMG:+\\nsertif2.jpg'">
+                    </div>
+                    <div class="w-full sm:w-3/5 p-6 flex flex-col justify-center">
+                        <div class="font-mono text-cyber-neon text-xs mb-2"><i class="fas fa-certificate mr-1"></i>Tahun 2025</div>
+                        <h3 class="text-lg font-bold text-white mb-2 leading-tight">Belajar Pengembangan Web Intermediate</h3>
+                        <p class="text-gray-400 text-xs">Meningkatkan pemahaman struktur web lanjut, manajemen state, serta pengujian kualitas kode.</p>
+                    </div>
+                </div>
+
+                <div class="tech-card bg-cyber-card flex flex-col sm:flex-row rounded-lg overflow-hidden h-full">
+                    <div class="w-full sm:w-2/5 h-48 sm:h-auto bg-gray-800 border-r border-cyber-neon/20">
+                        <img src="images/sertif3.jpg" data-gallery="certs" class="lightbox-trigger w-full h-full object-cover" onerror="this.src='https://placehold.co/400x400/1f2937/00f0ff?text=IMG:+\\nsertif3.jpg'">
+                    </div>
+                    <div class="w-full sm:w-3/5 p-6 flex flex-col justify-center">
+                        <div class="font-mono text-cyber-neon text-xs mb-2"><i class="fas fa-certificate mr-1"></i>Tahun 2025</div>
+                        <h3 class="text-lg font-bold text-white mb-2 leading-tight">Belajar Fundamental Front-End Web Development</h3>
+                        <p class="text-gray-400 text-xs">Menguasai pondasi JavaScript, API fetching, dan konsep DOM yang responsif.</p>
+                    </div>
+                </div>
+
+                <div class="tech-card bg-cyber-card flex flex-col sm:flex-row rounded-lg overflow-hidden h-full">
+                    <div class="w-full sm:w-2/5 h-48 sm:h-auto bg-gray-800 border-r border-cyber-neon/20">
+                        <img src="images/sertif4.jpg" data-gallery="certs" class="lightbox-trigger w-full h-full object-cover" onerror="this.src='https://placehold.co/400x400/1f2937/00f0ff?text=IMG:+\\nsertif4.jpg'">
+                    </div>
+                    <div class="w-full sm:w-3/5 p-6 flex flex-col justify-center">
+                        <div class="font-mono text-cyber-neon text-xs mb-2"><i class="fas fa-certificate mr-1"></i>Tahun 2025</div>
+                        <h3 class="text-lg font-bold text-white mb-2 leading-tight">Belajar Membuat Front-End Web untuk Pemula</h3>
+                        <p class="text-gray-400 text-xs">Sertifikasi penguasaan dasar-dasar sintaksis HTML dan CSS untuk pembuatan antarmuka web.</p>
+                    </div>
+                </div>
+
+            </div>
+            
+            <div class="mt-12 bg-cyber-card/50 border border-yellow-500/30 p-4 rounded-lg">
+                <h4 class="text-yellow-400 font-mono text-sm mb-2"><i class="fas fa-exclamation-triangle mr-2"></i>[SYSTEM NOTE]: Daftar File Gambar yang perlu disiapkan di folder "images":</h4>
+                <ul class="list-disc list-inside text-gray-400 text-xs font-mono columns-2 md:columns-4 space-y-1">
+                    <li>profile.jpg</li>
+                    <li>kerja1_1.jpg</li>
+                    <li>kerja1_2.jpg</li>
+                    <li>kerja1_3.jpg</li>
+                    <li>kerja2_1.jpg</li>
+                    <li>kerja2_2.jpg</li>
+                    <li>kerja2_3.jpg</li>
+                    <li>kerja3_1.jpg</li>
+                    <li>kerja3_2.jpg</li>
+                    <li>kerja3_3.jpg</li>
+                    <li>project1.jpg</li>
+                    <li>project2.jpg</li>
+                    <li>project3.jpg</li>
+                    <li>sertif1.jpg</li>
+                    <li>sertif2.jpg</li>
+                    <li>sertif3.jpg</li>
+                    <li>sertif4.jpg</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-20 bg-cyber-dark relative border-t border-cyber-neon/10">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="font-mono text-cyber-neon text-lg mb-4">06. Ping_Me()</h2>
+            <h3 class="text-4xl font-bold text-white mb-6">Mari Terhubung</h3>
+            
+            <div class="flex flex-col sm:flex-row justify-center gap-6 mb-12">
+                <a href="mailto:muhyusufarifin31@gmail.com" class="tech-card bg-cyber-card px-6 py-4 rounded-lg flex items-center gap-4 w-full sm:w-auto justify-center">
+                    <i class="fas fa-envelope text-2xl text-cyber-neon"></i>
+                    <div class="text-left font-mono">
+                        <div class="text-xs text-gray-400">Email</div>
+                        <div class="text-sm text-white">muhyusufarifin31@gmail.com</div>
+                    </div>
+                </a>
+                
+                <a href="https://wa.me/6289687108397" target="_blank" class="tech-card bg-cyber-card px-6 py-4 rounded-lg flex items-center gap-4 w-full sm:w-auto justify-center">
+                    <i class="fas fa-phone-alt text-2xl text-cyber-neon"></i>
+                    <div class="text-left font-mono">
+                        <div class="text-xs text-gray-400">WhatsApp</div>
+                        <div class="text-sm text-white">089687108397</div>
+                    </div>
+                </a>
+            </div>
+            <div class="inline-flex items-center gap-3 bg-cyber-card px-6 py-3 rounded-full border border-cyber-neon/20 font-mono text-sm text-gray-300">
+                <i class="fas fa-map-marker-alt text-cyber-neon"></i> Jalan Veteran Perang Kemerdekaan Rt 03 RW 10
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-6 bg-[#03060a] border-t border-gray-800 text-center">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p class="font-mono text-xs text-gray-500">
+                Designed & Built with <span class="text-cyber-neon">&lt;3</span> by Muhammad Yusuf Arifin <br>
+                &copy; 2026 All Rights Reserved. System.exit(0);
+            </p>
+        </div>
+    </footer>
+
+    <div id="lightbox" class="fixed inset-0 z-[9999] hidden bg-black/90 flex items-center justify-center opacity-0 transition-opacity duration-300">
+        <button id="lb-close" class="absolute top-4 right-6 text-cyber-neon text-4xl hover:text-white transition-colors">&times;</button>
+        <button id="lb-prev" class="absolute left-4 sm:left-10 text-cyber-neon text-4xl sm:text-6xl hover:text-white transition-colors bg-black/50 w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center hidden">&#10094;</button>
+        <div class="max-w-5xl max-h-[90vh] w-full px-16 flex justify-center">
+            <img id="lb-img" class="max-w-full max-h-[85vh] object-contain border border-cyber-neon shadow-neon rounded" src="" alt="Enlarged view">
+        </div>
+        <button id="lb-next" class="absolute right-4 sm:right-10 text-cyber-neon text-4xl sm:text-6xl hover:text-white transition-colors bg-black/50 w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center hidden">&#10095;</button>
+    </div>
+
+    <script>
+        // Smooth scrolling navbar
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Efek bayangan Navbar saat scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) nav.classList.add('shadow-neon');
+            else nav.classList.remove('shadow-neon');
+        });
+
+        // Logika Carousel Gambar Otomatis (3.5 detik)
+        document.querySelectorAll('.carousel-container').forEach(container => {
+            const track = container.querySelector('.carousel-track');
+            if (track) {
+                const slides = track.querySelectorAll('.carousel-slide');
+                let currentIndex = 0;
+                const slideCount = slides.length;
+                
+                if(slideCount > 1) {
+                    setInterval(() => {
+                        currentIndex = (currentIndex + 1) % slideCount;
+                        track.style.transform = `translateX(-${currentIndex * 100}%)`;
+                    }, 3500);
+                }
+            }
+        });
+
+        // Logika Lightbox (Modal Pembesar Gambar)
+        let currentGallery = [];
+        let currentIndex = 0;
+        
+        const lightbox = document.getElementById('lightbox');
+        const lbImg = document.getElementById('lb-img');
+        const lbPrev = document.getElementById('lb-prev');
+        const lbNext = document.getElementById('lb-next');
+        const lbClose = document.getElementById('lb-close');
+
+        // Event listener ke semua gambar yang memiliki class .lightbox-trigger
+        document.querySelectorAll('.lightbox-trigger').forEach(img => {
+            img.addEventListener('click', (e) => {
+                const galleryName = e.target.getAttribute('data-gallery');
+                
+                // Kumpulkan semua gambar dengan atribut data-gallery yang sama
+                currentGallery = Array.from(document.querySelectorAll(`img[data-gallery="${galleryName}"]`));
+                currentIndex = currentGallery.indexOf(e.target);
+                
+                openLightbox();
+            });
+        });
+
+        function openLightbox() {
+            lightbox.classList.remove('hidden');
+            setTimeout(() => lightbox.classList.remove('opacity-0'), 10);
+            updateLightbox();
+        }
+
+        function closeLightbox() {
+            lightbox.classList.add('opacity-0');
+            setTimeout(() => lightbox.classList.add('hidden'), 300);
+        }
+
+        function updateLightbox() {
+            const activeImg = currentGallery[currentIndex];
+            // Gunakan src saat ini, meskipun itu gambar placeholder error
+            lbImg.src = activeImg.src; 
+            
+            // Tampilkan tombol next/prev jika gallery lebih dari 1 gambar
+            if (currentGallery.length > 1) {
+                lbPrev.classList.remove('hidden');
+                lbNext.classList.remove('hidden');
+            } else {
+                lbPrev.classList.add('hidden');
+                lbNext.classList.add('hidden');
+            }
+        }
+
+        lbNext.addEventListener('click', (e) => {
+            e.stopPropagation();
+            currentIndex = (currentIndex + 1) % currentGallery.length;
+            updateLightbox();
+        });
+
+        lbPrev.addEventListener('click', (e) => {
+            e.stopPropagation();
+            currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
+            updateLightbox();
+        });
+
+        lbClose.addEventListener('click', closeLightbox);
+        
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox || e.target.closest('div.flex.justify-center') === e.target) {
+                closeLightbox();
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (!lightbox.classList.contains('hidden')) {
+                if (e.key === 'Escape') closeLightbox();
+                if (e.key === 'ArrowRight' && currentGallery.length > 1) lbNext.click();
+                if (e.key === 'ArrowLeft' && currentGallery.length > 1) lbPrev.click();
+            }
+        });
+    </script>
+</body>
+</html>
